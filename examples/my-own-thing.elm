@@ -15,11 +15,10 @@ main =
 type alias Model =
     Int
 
+initialCount = 2
 
 model : Model
-model =
-    0
-
+model = initialCount
 
 
 -- UPDATE
@@ -28,14 +27,15 @@ model =
 type Msg
     = Increment
     | Decrement
-
+    | Reset
 
 update : Msg -> Model -> Model
 update msg model =
     case msg of
         Increment ->
             model + 1
-
+        Reset ->
+            initialCount
         Decrement ->
             model - 1
 
@@ -46,7 +46,8 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ button [ onClick Decrement ] [ text "-" ]
+        [ button [ onClick Reset ] [ text "Reset dat shizzz" ]
+        , button [ onClick Decrement ] [ text "-" ]
         , div [] [ text (toString model) ]
         , button [ onClick Increment ] [ text "+" ]
         ]
